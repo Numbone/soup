@@ -1,0 +1,85 @@
+ Container soup-postgres-1 Running 
+ Container soup-postgres-1 Waiting 
+ Container soup-postgres-1 Healthy 
+ Container soup-chaos-run-acaf277656d9 Creating 
+ Container soup-chaos-run-acaf277656d9 Created 
+=== CHAOS RUN label=v2-negative-control-no-heartbeat seed=1794550618580504429 started=2026-11-13T06:16:58Z
+config: jobs=3000 workers=8 rate=150/s kill_every=2s stall_every=7s stall_for=6s lease=3s dur=10..200ms
+        cancel=0.10 double_cancel=0.20 fail=0.02 long=0.030 burst=0.10 timeout_retry=0.05 dup=0.30 conflict=0.02 worker_args="-unsafe-no-heartbeat"
+[   0.22s] api + 8 workers up
+[  10.24s] progress: map[cancelled:115 failed:4 queued:1125 running:3 succeeded:252] kills=4 stalls=1 claims=271 done=252 fenced=3 lease_lost=0
+[  20.23s] progress: map[cancelled:264 failed:6 queued:2446 running:6 succeeded:276] kills=9 stalls=2 claims=309 done=276 fenced=11 lease_lost=0
+[  20.24s] production done: 3000 keys submitted; waiting for async replays/cancels
+[  25.03s] async client traffic done; waiting for drain (no queued/running)
+[  30.23s] progress: map[cancelled:292 failed:12 queued:2296 running:4 succeeded:396] kills=13 stalls=5 claims=441 done=396 fenced=17 lease_lost=0
+[  40.23s] progress: map[cancelled:292 failed:17 queued:2206 running:2 succeeded:483] kills=18 stalls=6 claims=543 done=483 fenced=24 lease_lost=0
+[  50.24s] progress: map[cancelled:292 failed:19 queued:2101 running:5 succeeded:583] kills=24 stalls=8 claims=657 done=583 fenced=31 lease_lost=0
+[  60.23s] progress: map[cancelled:292 failed:22 queued:2040 running:4 succeeded:642] kills=29 stalls=9 claims=727 done=642 fenced=37 lease_lost=0
+[  70.24s] progress: map[cancelled:292 failed:25 queued:1927 running:5 succeeded:751] kills=34 stalls=10 claims=849 done=751 fenced=44 lease_lost=0
+[  80.24s] progress: map[cancelled:292 failed:28 queued:1843 running:5 succeeded:832] kills=39 stalls=12 claims=942 done=832 fenced=50 lease_lost=0
+[  90.23s] progress: map[cancelled:292 failed:31 queued:1733 running:6 succeeded:938] kills=44 stalls=14 claims=1060 done=938 fenced=57 lease_lost=0
+[ 100.23s] progress: map[cancelled:292 failed:34 queued:1597 running:2 succeeded:1075] kills=49 stalls=15 claims=1210 done=1075 fenced=64 lease_lost=0
+[ 110.23s] progress: map[cancelled:292 failed:37 queued:1543 running:6 succeeded:1122] kills=54 stalls=17 claims=1273 done=1122 fenced=73 lease_lost=0
+[ 120.24s] progress: map[cancelled:292 failed:49 queued:1268 running:6 succeeded:1385] kills=58 stalls=18 claims=1555 done=1385 fenced=79 lease_lost=0
+[ 130.23s] progress: map[cancelled:292 failed:53 queued:1136 running:5 succeeded:1514] kills=62 stalls=19 claims=1697 done=1514 fenced=85 lease_lost=0
+[ 140.23s] progress: map[cancelled:292 failed:55 queued:1125 running:5 succeeded:1523] kills=67 stalls=20 claims=1718 done=1523 fenced=92 lease_lost=0
+[ 150.23s] progress: map[cancelled:292 failed:59 queued:1100 running:3 succeeded:1546] kills=70 stalls=22 claims=1751 done=1547 fenced=98 lease_lost=0
+[ 160.24s] progress: map[cancelled:292 failed:65 queued:840 running:6 succeeded:1797] kills=75 stalls=22 claims=2018 done=1797 fenced=105 lease_lost=0
+[ 170.24s] progress: map[cancelled:292 failed:66 queued:834 running:4 succeeded:1804] kills=81 stalls=24 claims=2038 done=1804 fenced=112 lease_lost=0
+[ 180.23s] progress: map[cancelled:292 failed:71 queued:753 running:6 succeeded:1878] kills=85 stalls=26 claims=2126 done=1878 fenced=121 lease_lost=0
+[ 190.23s] progress: map[cancelled:292 failed:74 queued:698 running:4 succeeded:1932] kills=90 stalls=27 claims=2195 done=1932 fenced=129 lease_lost=0
+[ 200.23s] progress: map[cancelled:292 failed:77 queued:658 running:5 succeeded:1968] kills=94 stalls=28 claims=2244 done=1968 fenced=138 lease_lost=0
+[ 210.23s] progress: map[cancelled:292 failed:82 queued:542 running:5 succeeded:2079] kills=100 stalls=29 claims=2368 done=2079 fenced=143 lease_lost=0
+[ 220.24s] progress: map[cancelled:292 failed:83 queued:533 running:3 succeeded:2089] kills=104 stalls=31 claims=2390 done=2089 fenced=151 lease_lost=0
+[ 230.23s] progress: map[cancelled:292 failed:87 queued:513 running:4 succeeded:2104] kills=109 stalls=32 claims=2418 done=2104 fenced=158 lease_lost=0
+[ 240.23s] progress: map[cancelled:292 failed:90 queued:477 running:3 succeeded:2138] kills=113 stalls=34 claims=2463 done=2138 fenced=165 lease_lost=0
+[ 250.24s] progress: map[cancelled:292 failed:95 queued:374 running:5 succeeded:2234] kills=118 stalls=36 claims=2575 done=2234 fenced=173 lease_lost=0
+[ 260.23s] progress: map[cancelled:292 failed:98 queued:362 running:3 succeeded:2245] kills=123 stalls=37 claims=2598 done=2245 fenced=180 lease_lost=0
+[ 270.23s] progress: map[cancelled:292 failed:102 queued:301 running:5 succeeded:2300] kills=128 stalls=38 claims=2668 done=2300 fenced=188 lease_lost=0
+[ 280.24s] progress: map[cancelled:292 failed:104 queued:239 running:4 succeeded:2361] kills=133 stalls=39 claims=2741 done=2361 fenced=195 lease_lost=0
+[ 290.23s] progress: map[cancelled:292 failed:108 queued:198 running:4 succeeded:2398] kills=139 stalls=41 claims=2792 done=2398 fenced=201 lease_lost=0
+[ 300.23s] progress: map[cancelled:292 failed:115 queued:93 running:7 succeeded:2493] kills=144 stalls=43 claims=2905 done=2493 fenced=210 lease_lost=0
+[ 310.24s] progress: map[cancelled:292 failed:120 queued:41 running:4 succeeded:2543] kills=148 stalls=45 claims=2966 done=2543 fenced=215 lease_lost=0
+[ 320.23s] progress: map[cancelled:292 failed:122 running:4 succeeded:2582] kills=154 stalls=46 claims=3016 done=2582 fenced=222 lease_lost=0
+[ 329.20s] drained
+[ 333.22s] all processes killed; checking invariants (throughput: 9.0 jobs/s end-to-end)
+
+=== STATS
+elapsed=5m33.219s final_states=map[cancelled:292 failed:125 succeeded:2583]
+chaos: kill9=157 sigstop_zombies=48 processes_spawned=166
+workers: claims=3023 done=2583 failed=52 fenced(stale completion rejected)=231 lease_lost(aborted)=0 reaped_requeued=313 reaped_failed=73 error_lines=0
+http: post_201=2862 post_200=1656 bursts(3x)=301 timeout_then_retry=138 replays=916 conflicts_409=67 cancels=355 (200=347 409=8) gets=214046 net_errs=0 5xx=0 api_error_lines=0
+executions: total_runs=3023 jobs_executed_more_than_once=94 (at-least-once execution is expected; effects must still be <=1)
+runs-per-job histogram: 0 runs:290 jobs, 1 runs:2616 jobs, 2 runs:21 jobs, 5 runs:73 jobs
+latency: queued->first_claim p50=107.50s p99=292.50s | created->succeeded p50=107.34s p99=292.56s
+effects: total=2583
+
+=== INVARIANTS
+FAIL  C  coverage: a running job was cancelled and its worker aborted (LEASE_LOST)  (violations=1)
+         lease_lost=0
+PASS  C  coverage: a zombie was rejected (FENCED or LEASE_LOST)
+FAIL  C  coverage: heartbeat kept a job longer than the lease alive (succeeded on attempt 1)  (violations=1)
+         long jobs succeeded first try=0
+PASS  C  coverage: kill -9 happened and some job ran more than once
+PASS  I1 no lost job: ack'd id matches DB row for that key
+PASS  I1 no lost job: every acknowledged (key,id) exists in DB
+PASS  I1 no phantom/duplicate job: DB has exactly one row per submitted key
+PASS  I2 at most one effect per job
+PASS  I3 nothing stuck in running/queued after drain
+PASS  I4 attempt counter == number of claims, each attempt claimed once (no double claim)
+PASS  I4 cancel acknowledged with 200 => job is cancelled
+PASS  I4 cancelled/failed jobs have no effect
+PASS  I4 effect written by the job's final attempt (no stale/zombie effect)
+PASS  I4 non-failing payload only fails by exhausting attempts
+PASS  I4 payload.fail=true => never succeeded
+PASS  I4 succeeded <=> exactly one effect
+PASS  I4 terminal jobs have finished_at and no lease
+PASS  I5 client-side: idempotency, 409 on conflict, cancel semantics, no terminal flip
+PASS  I6 no HTTP 5xx from API (availability, not data safety)
+PASS  I7 every DONE a worker logged has the matching committed effect (no acknowledged-but-lost result)
+FAIL  I8 lease expiries <= kills + stalls (no unexplained lease loss)  (violations=181)
+         expiries=386 kills+stalls=205
+
+=== RESULT: FAIL (3 invariant groups violated) label=v2-negative-control-no-heartbeat seed=1794550618580504429
+
+exit_code=1

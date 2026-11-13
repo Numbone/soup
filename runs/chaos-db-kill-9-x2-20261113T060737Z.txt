@@ -1,0 +1,83 @@
+ Container soup-postgres-1 Running 
+ Container soup-postgres-1 Waiting 
+ Container soup-postgres-1 Healthy 
+ Container soup-chaos-run-15066deaf44e Creating 
+ Container soup-chaos-run-15066deaf44e Created 
+=== CHAOS RUN label=db-kill-9-x2 seed=1794550058596815545 started=2026-11-13T06:07:38Z
+config: jobs=10000 workers=8 rate=150/s kill_every=2s stall_every=7s stall_for=6s lease=3s dur=10..200ms
+        cancel=0.10 double_cancel=0.20 fail=0.02 burst=0.10 timeout_retry=0.05 dup=0.30 conflict=0.02 worker_args=""
+[   0.22s] api + 8 workers up
+[  10.24s] progress: map[cancelled:111 failed:11 queued:659 running:8 succeeded:710] kills=5 stalls=1 claims=734 done=711 fenced=0 lease_lost=0
+[  20.24s] progress: map[cancelled:299 failed:21 queued:1310 running:9 succeeded:1359] kills=10 stalls=2 claims=1399 done=1359 fenced=1 lease_lost=0
+[  30.24s] progress: map[cancelled:443 failed:34 queued:1985 running:10 succeeded:2027] kills=15 stalls=4 claims=2087 done=2027 fenced=3 lease_lost=0
+[  40.24s] progress: map[cancelled:547 failed:45 queued:2500 running:10 succeeded:2551] kills=20 stalls=5 claims=2634 done=2551 fenced=3 lease_lost=0
+[  50.24s] progress: map[cancelled:705 failed:62 queued:3157 running:8 succeeded:3220] kills=25 stalls=6 claims=3325 done=3220 fenced=3 lease_lost=0
+[  60.24s] progress: map[cancelled:849 failed:73 queued:3815 running:8 succeeded:3907] kills=31 stalls=7 claims=4030 done=3907 fenced=4 lease_lost=0
+[  69.22s] production done: 10000 keys submitted; waiting for async replays/cancels
+[  70.24s] progress: map[cancelled:1007 failed:87 queued:4305 running:9 succeeded:4592] kills=35 stalls=8 claims=4735 done=4592 fenced=6 lease_lost=0
+[  73.62s] async client traffic done; waiting for drain (no queued/running)
+[  80.24s] progress: map[cancelled:1011 failed:96 queued:3806 running:7 succeeded:5080] kills=40 stalls=10 claims=5243 done=5080 fenced=6 lease_lost=0
+[  90.24s] progress: map[cancelled:1011 failed:114 queued:3137 running:9 succeeded:5729] kills=46 stalls=11 claims=5917 done=5730 fenced=6 lease_lost=0
+[ 100.24s] progress: map[cancelled:1011 failed:126 queued:2412 running:9 succeeded:6442] kills=49 stalls=12 claims=6646 done=6443 fenced=7 lease_lost=0
+[ 110.24s] progress: map[cancelled:1011 failed:144 queued:1763 running:8 succeeded:7074] kills=54 stalls=14 claims=7302 done=7074 fenced=8 lease_lost=0
+[ 120.24s] progress: map[cancelled:1011 failed:154 queued:1056 running:8 succeeded:7771] kills=59 stalls=15 claims=8014 done=7771 fenced=8 lease_lost=0
+[ 130.24s] progress: map[cancelled:1011 failed:168 queued:399 running:7 succeeded:8415] kills=64 stalls=16 claims=8676 done=8415 fenced=8 lease_lost=0
+[ 138.50s] drained
+[ 138.50s] all processes killed; checking invariants (throughput: 72.2 jobs/s end-to-end)
+
+=== STATS
+elapsed=2m18.504s final_states=map[cancelled:1011 failed:175 succeeded:8814]
+chaos: kill9=68 sigstop_zombies=17 processes_spawned=77
+workers: claims=9079 done=8814 failed=175 fenced(stale completion rejected)=9 lease_lost(aborted)=0 reaped_requeued=90 reaped_failed=0 error_lines=321
+http: post_201=9542 post_200=5383 bursts(3x)=985 timeout_then_retry=458 replays=2955 conflicts_409=216 cancels=1240 (200=1211 409=29) gets=87972 net_errs=0 5xx=867 api_error_lines=1186
+executions: total_runs=9079 jobs_executed_more_than_once=89 (at-least-once execution is expected; effects must still be <=1)
+runs-per-job histogram: 0 runs:1011 jobs, 1 runs:8900 jobs, 2 runs:88 jobs, 3 runs:1 jobs
+latency: queued->first_claim p50=33.10s p99=65.85s | created->succeeded p50=33.21s p99=66.02s
+effects: total=8814
+error line samples:
+   worker: worker=4bfffa7dafb8-234-8b8dbb 06:08:12.901509 ERROR complete job=3975 attempt=1: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   api: time=2026-11-13T06:08:12.901Z level=ERROR msg="request failed" op=create err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.902Z level=ERROR msg="request failed" op=get err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.902Z level=ERROR msg="request failed" op=get err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.902Z level=ERROR msg="request failed" op=get err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.902Z level=ERROR msg="request failed" op=get err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.902Z level=ERROR msg="request failed" op=get err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.902Z level=ERROR msg="request failed" op=get err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.902Z level=ERROR msg="request failed" op=get err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.902Z level=ERROR msg="request failed" op=get err="FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)"
+   api: time=2026-11-13T06:08:12.903Z level=ERROR msg="request failed" op=get err="unexpected EOF"
+   api: time=2026-11-13T06:08:12.903Z level=ERROR msg="request failed" op=get err="unexpected EOF"
+   worker: worker=4bfffa7dafb8-234-8b8dbb 06:08:12.902559 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   api: time=2026-11-13T06:08:12.904Z level=ERROR msg="request failed" op=get err="failed to connect to `user=soup database=soup_chaos`:\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused"
+   api: time=2026-11-13T06:08:12.904Z level=ERROR msg="request failed" op=get err="failed to connect to `user=soup database=soup_chaos`:\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused"
+   api: time=2026-11-13T06:08:12.904Z level=ERROR msg="request failed" op=get err="failed to connect to `user=soup database=soup_chaos`:\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused"
+   api: time=2026-11-13T06:08:12.904Z level=ERROR msg="request failed" op=get err="failed to connect to `user=soup database=soup_chaos`:\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused"
+   api: time=2026-11-13T06:08:12.904Z level=ERROR msg="request failed" op=get err="failed to connect to `user=soup database=soup_chaos`:\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused"
+   api: time=2026-11-13T06:08:12.904Z level=ERROR msg="request failed" op=get err="failed to connect to `user=soup database=soup_chaos`:\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused"
+   api: time=2026-11-13T06:08:12.905Z level=ERROR msg="request failed" op=get err="failed to connect to `user=soup database=soup_chaos`:\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused\n\t172.22.0.2:5432 (postgres): dial error: dial tcp 172.22.0.2:5432: connect: connection refused"
+
+=== INVARIANTS
+PASS  I1 no lost job: ack'd id matches DB row for that key
+PASS  I1 no lost job: every acknowledged (key,id) exists in DB
+PASS  I1 no phantom/duplicate job: DB has exactly one row per submitted key
+PASS  I2 at most one effect per job
+PASS  I3 nothing stuck in running/queued after drain
+PASS  I4 attempt counter == number of claims, each attempt claimed once (no double claim)
+PASS  I4 cancel acknowledged with 200 => job is cancelled
+PASS  I4 cancelled/failed jobs have no effect
+PASS  I4 effect written by the job's final attempt (no stale/zombie effect)
+PASS  I4 non-failing payload only fails by exhausting attempts
+PASS  I4 payload.fail=true => never succeeded
+PASS  I4 succeeded <=> exactly one effect
+PASS  I4 terminal jobs have finished_at and no lease
+FAIL  I5 client-side: idempotency, 409 on conflict, cancel semantics, no terminal flip  (violations=319)
+         GET id=2288: status 500
+         GET id=7721: status 500
+         GET id=5682: status 500
+         GET id=6964: status 500
+         GET id=2739: status 500
+FAIL  I6 no HTTP 5xx from API  (violations=867)
+
+=== RESULT: FAIL (2 invariant groups violated) label=db-kill-9-x2 seed=1794550058596815545
+
+exit_code=1

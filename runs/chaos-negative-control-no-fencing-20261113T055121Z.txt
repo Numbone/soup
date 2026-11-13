@@ -1,0 +1,60 @@
+ Container soup-postgres-1 Running 
+ Container soup-postgres-1 Waiting 
+ Container soup-postgres-1 Healthy 
+ Container soup-chaos-run-b34c0ba8b190 Creating 
+ Container soup-chaos-run-b34c0ba8b190 Created 
+=== CHAOS RUN label=negative-control-no-fencing seed=1794549081733039305 started=2026-11-13T05:51:21Z
+config: jobs=3000 workers=8 rate=150/s kill_every=2s stall_every=7s stall_for=6s lease=3s dur=10..200ms
+        cancel=0.10 double_cancel=0.20 fail=0.02 burst=0.10 timeout_retry=0.05 dup=0.30 conflict=0.02 worker_args="-unsafe-no-fence"
+[   0.22s] api + 8 workers up
+[  10.23s] progress: map[cancelled:94 failed:16 queued:685 running:10 succeeded:695] kills=5 stalls=1 claims=724 done=695 fenced=0 lease_lost=0
+[  20.23s] progress: map[cancelled:234 failed:25 queued:1384 running:9 succeeded:1347] kills=9 stalls=2 claims=1390 done=1348 fenced=0 lease_lost=0
+[  20.23s] production done: 3000 keys submitted; waiting for async replays/cancels
+[  24.82s] async client traffic done; waiting for drain (no queued/running)
+[  30.23s] progress: map[cancelled:254 failed:35 queued:650 running:9 succeeded:2052] kills=13 stalls=4 claims=2109 done=2053 fenced=0 lease_lost=0
+[  40.23s] progress: map[cancelled:254 failed:39 queued:23 running:9 succeeded:2675] kills=18 stalls=6 claims=2743 done=2678 fenced=0 lease_lost=0
+[  43.87s] drained
+[  43.88s] all processes killed; checking invariants
+
+=== STATS
+elapsed=43.882s final_states=map[cancelled:254 failed:39 succeeded:2707]
+chaos: kill9=20 sigstop_zombies=6 processes_spawned=29
+workers: claims=2769 done=2711 failed=39 fenced(stale completion rejected)=0 lease_lost(aborted)=0 reaped_requeued=23 reaped_failed=0 error_lines=0
+http: post_201=2867 post_200=1598 bursts(3x)=295 timeout_then_retry=133 replays=875 conflicts_409=51 cancels=331 (200=309 409=22) gets=28954 net_errs=0 5xx=0 api_error_lines=0
+executions: total_runs=2769 jobs_executed_more_than_once=23 (at-least-once execution is expected; effects must still be <=1)
+runs-per-job histogram: 0 runs:254 jobs, 1 runs:2723 jobs, 2 runs:23 jobs
+effects: total=2711
+
+=== INVARIANTS
+PASS  I1 no lost job: ack'd id matches DB row for that key
+PASS  I1 no lost job: every acknowledged (key,id) exists in DB
+PASS  I1 no phantom/duplicate job: DB has exactly one row per submitted key
+FAIL  I2 at most one effect per job  (violations=4)
+         [4335 2]
+         [3182 2]
+         [1291 2]
+         [3711 2]
+PASS  I3 nothing stuck in running/queued after drain
+PASS  I4 attempt counter == number of claims, each attempt claimed once (no double claim)
+FAIL  I4 cancel acknowledged with 200 => job is cancelled  (violations=1)
+         [132 succeeded]
+PASS  I4 cancelled/failed jobs have no effect
+FAIL  I4 effect written by the job's final attempt (no stale/zombie effect)  (violations=4)
+         [1291 2 1]
+         [4335 2 1]
+         [3182 2 1]
+         [3711 2 1]
+PASS  I4 non-failing payload only fails by exhausting attempts
+PASS  I4 payload.fail=true => never succeeded
+FAIL  I4 succeeded <=> exactly one effect  (violations=4)
+         [4335 succeeded 2]
+         [3182 succeeded 2]
+         [1291 succeeded 2]
+         [3711 succeeded 2]
+PASS  I4 terminal jobs have finished_at and no lease
+PASS  I5 client-side: idempotency, 409 on conflict, cancel semantics, no terminal flip
+PASS  I6 no HTTP 5xx from API
+
+=== RESULT: FAIL (4 invariant groups violated) label=negative-control-no-fencing seed=1794549081733039305
+
+exit_code=1

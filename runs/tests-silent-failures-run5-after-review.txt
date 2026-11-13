@@ -1,0 +1,39 @@
+?   	github.com/soup/jobqueue/cmd/api	[no test files]
+?   	github.com/soup/jobqueue/cmd/chaos	[no test files]
+?   	github.com/soup/jobqueue/cmd/worker	[no test files]
+?   	github.com/soup/jobqueue/internal/api	[no test files]
+=== RUN   TestDoubleClaim_SkipLocked
+    silent_failures_test.go:97: claimed 2000 distinct jobs, 0 claimed more than once
+--- PASS: TestDoubleClaim_SkipLocked (0.77s)
+=== RUN   TestDoubleClaim_NaiveSelectThenUpdate_IsBroken
+    silent_failures_test.go:126: NEGATIVE CONTROL: naive claim handed 486 of 500 jobs to more than one worker
+--- PASS: TestDoubleClaim_NaiveSelectThenUpdate_IsBroken (0.68s)
+=== RUN   TestZombieCannotWriteStaleResult
+--- PASS: TestZombieCannotWriteStaleResult (1.23s)
+=== RUN   TestZombie_NoFencing_IsBroken
+    silent_failures_test.go:223: NEGATIVE CONTROL: without fencing the job has 2 effects
+--- PASS: TestZombie_NoFencing_IsBroken (1.24s)
+=== RUN   TestCancelCompleteRace
+    silent_failures_test.go:240: cancel won=13 complete won=387 both=0 neither=0 inconsistent=0
+--- PASS: TestCancelCompleteRace (1.35s)
+=== RUN   TestCancelCompleteRace_CheckThenAct_IsBroken
+    silent_failures_test.go:281: NEGATIVE CONTROL: both reported success (lost cancel)=123, final state disagrees with effects=101
+--- PASS: TestCancelCompleteRace_CheckThenAct_IsBroken (0.86s)
+=== RUN   TestIdempotentCreate_ConcurrentRetries
+--- PASS: TestIdempotentCreate_ConcurrentRetries (0.24s)
+=== RUN   TestIdempotentCreate_CheckThenInsert_IsBroken
+    silent_failures_test.go:414: NEGATIVE CONTROL: check-then-insert produced 50 rows for one key
+--- PASS: TestIdempotentCreate_CheckThenInsert_IsBroken (0.08s)
+=== RUN   TestIsolation_RepeatableRead_StillSafeButLoserErrors
+    silent_failures_test.go:463: REPEATABLE READ: 50/300 races surfaced a serialization error to the loser; inconsistent=0
+--- PASS: TestIsolation_RepeatableRead_StillSafeButLoserErrors (1.01s)
+=== RUN   TestClockSkew_StoreUsesOnlyDBClock
+--- PASS: TestClockSkew_StoreUsesOnlyDBClock (0.02s)
+=== RUN   TestCanonicalHash_KeepsExactNumbers
+--- PASS: TestCanonicalHash_KeepsExactNumbers (0.00s)
+PASS
+ok  	github.com/soup/jobqueue/internal/store	7.766s
+=== RUN   TestReaperRunsWhileWorkerIsBusy
+--- PASS: TestReaperRunsWhileWorkerIsBusy (0.66s)
+PASS
+ok  	github.com/soup/jobqueue/internal/worker	0.949s

@@ -1,0 +1,40 @@
+?   	github.com/soup/jobqueue/cmd/api	[no test files]
+?   	github.com/soup/jobqueue/cmd/chaos	[no test files]
+?   	github.com/soup/jobqueue/cmd/worker	[no test files]
+?   	github.com/soup/jobqueue/internal/api	[no test files]
+=== RUN   TestDoubleClaim_SkipLocked
+    silent_failures_test.go:82: ERROR: duplicate key value violates unique constraint "pg_class_relname_nsp_index" (SQLSTATE 23505)
+--- FAIL: TestDoubleClaim_SkipLocked (0.01s)
+=== RUN   TestDoubleClaim_NaiveSelectThenUpdate_IsBroken
+    silent_failures_test.go:126: NEGATIVE CONTROL: naive claim handed 465 of 475 jobs to more than one worker
+--- PASS: TestDoubleClaim_NaiveSelectThenUpdate_IsBroken (0.46s)
+=== RUN   TestZombieCannotWriteStaleResult
+    silent_failures_test.go:178: reap: requeued=0 err=<nil>
+--- FAIL: TestZombieCannotWriteStaleResult (1.22s)
+=== RUN   TestZombie_NoFencing_IsBroken
+--- FAIL: TestZombie_NoFencing_IsBroken (1.24s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x3bbe78]
+
+goroutine 546 [running]:
+testing.tRunner.func1.2({0x8b8458, 0x987f10})
+	/usr/local/go/src/testing/testing.go:2125 +0x1a0
+testing.tRunner.func1()
+	/usr/local/go/src/testing/testing.go:2128 +0x2c8
+panic({0x8b8458?, 0x987f10?})
+	/usr/local/go/src/runtime/panic.go:859 +0x120
+github.com/soup/jobqueue/internal/store.(*Store).Complete(0x39b87c614100?, {0x928770, 0x9c5c40}, 0x0, {0x4477b8, 0x1}, 0x1)
+	/src/internal/store/store.go:292 +0xc8
+github.com/soup/jobqueue/internal/store.TestZombie_NoFencing_IsBroken(0x39b87c95c488)
+	/src/internal/store/silent_failures_test.go:218 +0xe8
+testing.tRunner(0x39b87c95c488, 0x92a6e0)
+	/usr/local/go/src/testing/testing.go:2195 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:2260 +0x3b8
+FAIL	github.com/soup/jobqueue/internal/store	2.931s
+=== RUN   TestReaperRunsWhileWorkerIsBusy
+    worker_test.go:66: abandoned job was not reaped while the live worker was busy with a long job
+--- FAIL: TestReaperRunsWhileWorkerIsBusy (3.03s)
+FAIL
+FAIL	github.com/soup/jobqueue/internal/worker	3.034s
+FAIL

@@ -1,0 +1,31 @@
+=== RUN   TestDoubleClaim_SkipLocked
+    silent_failures_test.go:96: claimed 2000 distinct jobs, 0 claimed more than once
+--- PASS: TestDoubleClaim_SkipLocked (0.81s)
+=== RUN   TestDoubleClaim_NaiveSelectThenUpdate_IsBroken
+    silent_failures_test.go:125: NEGATIVE CONTROL: naive claim handed 487 of 500 jobs to more than one worker
+--- PASS: TestDoubleClaim_NaiveSelectThenUpdate_IsBroken (0.72s)
+=== RUN   TestZombieCannotWriteStaleResult
+--- PASS: TestZombieCannotWriteStaleResult (1.24s)
+=== RUN   TestZombie_NoFencing_IsBroken
+    silent_failures_test.go:222: NEGATIVE CONTROL: without fencing the job has 2 effects
+--- PASS: TestZombie_NoFencing_IsBroken (1.24s)
+=== RUN   TestCancelCompleteRace
+    silent_failures_test.go:239: cancel won=399 complete won=1 both=0 neither=0 inconsistent=0
+--- PASS: TestCancelCompleteRace (0.70s)
+=== RUN   TestCancelCompleteRace_CheckThenAct_IsBroken
+    silent_failures_test.go:279: NEGATIVE CONTROL: both reported success=199, final state disagrees with effects=0
+--- PASS: TestCancelCompleteRace_CheckThenAct_IsBroken (0.65s)
+=== RUN   TestIdempotentCreate_ConcurrentRetries
+--- PASS: TestIdempotentCreate_ConcurrentRetries (0.25s)
+=== RUN   TestIdempotentCreate_CheckThenInsert_IsBroken
+    silent_failures_test.go:405: NEGATIVE CONTROL: check-then-insert produced 1 rows for one key
+    silent_failures_test.go:407: negative control did not reproduce duplicate creation
+--- FAIL: TestIdempotentCreate_CheckThenInsert_IsBroken (0.06s)
+=== RUN   TestIsolation_RepeatableRead_StillSafeButLoserErrors
+    silent_failures_test.go:453: REPEATABLE READ: 287/300 races surfaced a serialization error to the loser; inconsistent=0
+--- PASS: TestIsolation_RepeatableRead_StillSafeButLoserErrors (0.56s)
+=== RUN   TestClockSkew_StoreUsesOnlyDBClock
+--- PASS: TestClockSkew_StoreUsesOnlyDBClock (0.02s)
+FAIL
+FAIL	github.com/soup/jobqueue/internal/store	6.770s
+FAIL

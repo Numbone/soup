@@ -1,0 +1,4 @@
+    worker_test.go:73: abandoned job was not reaped while the live worker was busy with a long job
+FAIL
+FAIL	github.com/soup/jobqueue/internal/worker	3.602s
+FAIL

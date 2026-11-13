@@ -1,0 +1,78 @@
+ Container soup-postgres-1 Running 
+ Container soup-postgres-1 Waiting 
+ Container soup-postgres-1 Healthy 
+ Container soup-chaos-run-dc4b65269df3 Creating 
+ Container soup-chaos-run-dc4b65269df3 Created 
+=== CHAOS RUN label=v2-full-10k-1 seed=1794550952631231708 started=2026-11-13T06:22:32Z
+config: jobs=10000 workers=8 rate=150/s kill_every=2s stall_every=7s stall_for=6s lease=3s dur=10..200ms
+        cancel=0.10 double_cancel=0.20 fail=0.02 long=0.010 burst=0.10 timeout_retry=0.05 dup=0.30 conflict=0.02 worker_args=""
+[   0.22s] api + 8 workers up
+[  10.24s] progress: map[cancelled:87 failed:7 queued:883 running:9 succeeded:514] kills=5 stalls=2 claims=534 done=514 fenced=0 lease_lost=0
+[  20.24s] progress: map[cancelled:233 failed:12 queued:1951 running:9 succeeded:795] kills=10 stalls=3 claims=825 done=795 fenced=0 lease_lost=0
+[  30.24s] progress: map[cancelled:378 failed:20 queued:2970 running:9 succeeded:1122] kills=15 stalls=4 claims=1166 done=1122 fenced=1 lease_lost=0
+[  40.24s] progress: map[cancelled:540 failed:27 queued:4013 running:9 succeeded:1410] kills=19 stalls=6 claims=1467 done=1410 fenced=3 lease_lost=0
+[  50.24s] progress: map[cancelled:690 failed:32 queued:4971 running:8 succeeded:1798] kills=23 stalls=7 claims=1864 done=1798 fenced=3 lease_lost=0
+[  60.24s] progress: map[cancelled:823 failed:45 queued:5849 running:9 succeeded:2274] kills=28 stalls=8 claims=2359 done=2274 fenced=4 lease_lost=0
+[  66.90s] production done: 10000 keys submitted; waiting for async replays/cancels
+[  70.24s] progress: map[cancelled:941 failed:51 queued:6404 running:8 succeeded:2596] kills=32 stalls=10 claims=2692 done=2596 fenced=5 lease_lost=0
+[  71.43s] async client traffic done; waiting for drain (no queued/running)
+[  80.24s] progress: map[cancelled:941 failed:62 queued:6051 running:9 succeeded:2937] kills=37 stalls=11 claims=3049 done=2937 fenced=5 lease_lost=0
+[  90.24s] progress: map[cancelled:941 failed:68 queued:5813 running:10 succeeded:3168] kills=43 stalls=13 claims=3293 done=3168 fenced=6 lease_lost=0
+[ 100.24s] progress: map[cancelled:941 failed:72 queued:5460 running:9 succeeded:3518] kills=47 stalls=15 claims=3652 done=3518 fenced=7 lease_lost=0
+[ 110.24s] progress: map[cancelled:941 failed:76 queued:5131 running:9 succeeded:3843] kills=52 stalls=16 claims=3987 done=3843 fenced=8 lease_lost=0
+[ 120.24s] progress: map[cancelled:941 failed:79 queued:4855 running:10 succeeded:4115] kills=58 stalls=18 claims=4269 done=4115 fenced=9 lease_lost=0
+[ 130.24s] progress: map[cancelled:941 failed:82 queued:4574 running:9 succeeded:4394] kills=61 stalls=19 claims=4555 done=4394 fenced=9 lease_lost=1
+[ 140.24s] progress: map[cancelled:941 failed:94 queued:4138 running:8 succeeded:4819] kills=66 stalls=20 claims=4997 done=4819 fenced=9 lease_lost=1
+[ 150.24s] progress: map[cancelled:941 failed:101 queued:3745 running:8 succeeded:5205] kills=71 stalls=23 claims=5397 done=5205 fenced=11 lease_lost=1
+[ 160.24s] progress: map[cancelled:941 failed:109 queued:3382 running:9 succeeded:5559] kills=77 stalls=24 claims=5766 done=5559 fenced=12 lease_lost=1
+[ 170.24s] progress: map[cancelled:941 failed:113 queued:3074 running:9 succeeded:5863] kills=82 stalls=26 claims=6080 done=5863 fenced=13 lease_lost=1
+[ 180.24s] progress: map[cancelled:941 failed:119 queued:2791 running:8 succeeded:6141] kills=86 stalls=27 claims=6369 done=6141 fenced=14 lease_lost=1
+[ 190.24s] progress: map[cancelled:941 failed:133 queued:2484 running:8 succeeded:6434] kills=91 stalls=28 claims=6680 done=6433 fenced=14 lease_lost=1
+[ 200.24s] progress: map[cancelled:941 failed:134 queued:2143 running:9 succeeded:6773] kills=97 stalls=29 claims=7027 done=6772 fenced=15 lease_lost=1
+[ 210.24s] progress: map[cancelled:941 failed:140 queued:1811 running:10 succeeded:7098] kills=103 stalls=31 claims=7364 done=7097 fenced=15 lease_lost=1
+[ 220.24s] progress: map[cancelled:941 failed:148 queued:1386 running:9 succeeded:7516] kills=108 stalls=32 claims=7796 done=7515 fenced=16 lease_lost=1
+[ 230.24s] progress: map[cancelled:941 failed:151 queued:1128 running:9 succeeded:7771] kills=115 stalls=35 claims=8064 done=7771 fenced=18 lease_lost=1
+[ 240.24s] progress: map[cancelled:941 failed:161 queued:741 running:10 succeeded:8147] kills=121 stalls=36 claims=8457 done=8146 fenced=20 lease_lost=1
+[ 250.24s] progress: map[cancelled:941 failed:165 queued:453 running:10 succeeded:8431] kills=126 stalls=38 claims=8752 done=8430 fenced=21 lease_lost=2
+[ 260.24s] progress: map[cancelled:941 failed:173 queued:173 running:9 succeeded:8704] kills=132 stalls=39 claims=9039 done=8703 fenced=22 lease_lost=2
+[ 270.24s] progress: map[cancelled:941 failed:178 running:1 succeeded:8880] kills=137 stalls=41 claims=9216 done=8879 fenced=22 lease_lost=2
+[ 280.24s] progress: map[cancelled:941 failed:178 running:1 succeeded:8880] kills=142 stalls=43 claims=9217 done=8879 fenced=22 lease_lost=2
+[ 290.24s] progress: map[cancelled:941 failed:178 running:1 succeeded:8880] kills=146 stalls=44 claims=9218 done=8879 fenced=22 lease_lost=2
+[ 294.00s] drained
+[ 298.01s] all processes killed; checking invariants (throughput: 33.6 jobs/s end-to-end)
+
+=== STATS
+elapsed=4m58.009s final_states=map[cancelled:941 failed:178 succeeded:8881]
+chaos: kill9=148 sigstop_zombies=45 processes_spawned=157
+workers: claims=9218 done=8880 failed=177 fenced(stale completion rejected)=22 lease_lost(aborted)=2 reaped_requeued=159 reaped_failed=1 error_lines=0
+http: post_201=9560 post_200=5418 bursts(3x)=986 timeout_then_retry=440 replays=3006 conflicts_409=181 cancels=1127 (200=1111 409=16) gets=191907 net_errs=0 5xx=0 api_error_lines=0
+executions: total_runs=9218 jobs_executed_more_than_once=134 (at-least-once execution is expected; effects must still be <=1)
+runs-per-job histogram: 0 runs:941 jobs, 1 runs:8925 jobs, 2 runs:120 jobs, 3 runs:8 jobs, 4 runs:1 jobs, 5 runs:5 jobs
+latency: queued->first_claim p50=97.54s p99=196.00s | created->succeeded p50=97.71s p99=196.20s
+effects: total=8881
+
+=== INVARIANTS
+PASS  C  coverage: a running job was cancelled and its worker aborted (LEASE_LOST)
+PASS  C  coverage: a zombie was rejected (FENCED or LEASE_LOST)
+PASS  C  coverage: heartbeat kept a job longer than the lease alive (succeeded on attempt 1)
+PASS  C  coverage: kill -9 happened and some job ran more than once
+PASS  I1 no lost job: ack'd id matches DB row for that key
+PASS  I1 no lost job: every acknowledged (key,id) exists in DB
+PASS  I1 no phantom/duplicate job: DB has exactly one row per submitted key
+PASS  I2 at most one effect per job
+PASS  I3 nothing stuck in running/queued after drain
+PASS  I4 attempt counter == number of claims, each attempt claimed once (no double claim)
+PASS  I4 cancel acknowledged with 200 => job is cancelled
+PASS  I4 cancelled/failed jobs have no effect
+PASS  I4 effect written by the job's final attempt (no stale/zombie effect)
+PASS  I4 non-failing payload only fails by exhausting attempts
+PASS  I4 payload.fail=true => never succeeded
+PASS  I4 succeeded <=> exactly one effect
+PASS  I4 terminal jobs have finished_at and no lease
+PASS  I5 client-side: idempotency, 409 on conflict, cancel semantics, no terminal flip
+PASS  I6 no HTTP 5xx from API (availability, not data safety)
+PASS  I7 every DONE a worker logged has the matching committed effect (no acknowledged-but-lost result)
+PASS  I8 lease expiries <= kills + stalls (no unexplained lease loss)
+
+=== RESULT: PASS label=v2-full-10k-1 seed=1794550952631231708
+exit_code=0

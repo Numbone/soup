@@ -1,0 +1,77 @@
+ Container soup-postgres-1 Running 
+ Container soup-postgres-1 Waiting 
+ Container soup-postgres-1 Healthy 
+ Container soup-chaos-run-c7ae4450b2a1 Creating 
+ Container soup-chaos-run-c7ae4450b2a1 Created 
+=== CHAOS RUN label=v2-negative-control-no-fencing seed=1794550519285558300 started=2026-11-13T06:15:19Z
+config: jobs=3000 workers=8 rate=150/s kill_every=2s stall_every=7s stall_for=6s lease=3s dur=10..200ms
+        cancel=0.10 double_cancel=0.20 fail=0.02 long=0.010 burst=0.10 timeout_retry=0.05 dup=0.30 conflict=0.02 worker_args="-unsafe-no-fence"
+[   0.22s] api + 8 workers up
+[  10.23s] progress: map[cancelled:105 failed:17 queued:840 running:9 succeeded:529] kills=4 stalls=0 claims=558 done=529 fenced=0 lease_lost=0
+[  20.23s] production done: 3000 keys submitted; waiting for async replays/cancels
+[  20.23s] progress: map[cancelled:256 failed:29 queued:1774 running:9 succeeded:931] kills=9 stalls=2 claims=978 done=932 fenced=0 lease_lost=0
+[  24.79s] async client traffic done; waiting for drain (no queued/running)
+[  30.23s] progress: map[cancelled:277 failed:33 queued:1404 running:9 succeeded:1277] kills=14 stalls=3 claims=1333 done=1278 fenced=0 lease_lost=0
+[  40.23s] progress: map[cancelled:277 failed:40 queued:1116 running:9 succeeded:1558] kills=19 stalls=5 claims=1628 done=1560 fenced=0 lease_lost=1
+[  50.23s] progress: map[cancelled:277 failed:44 queued:816 running:10 succeeded:1853] kills=24 stalls=6 claims=1933 done=1856 fenced=0 lease_lost=1
+[  60.23s] progress: map[cancelled:277 failed:49 queued:486 running:9 succeeded:2179] kills=29 stalls=7 claims=2269 done=2182 fenced=0 lease_lost=1
+[  70.23s] progress: map[cancelled:277 failed:56 queued:155 running:9 succeeded:2503] kills=34 stalls=9 claims=2605 done=2507 fenced=0 lease_lost=1
+[  80.23s] progress: map[cancelled:277 failed:59 running:3 succeeded:2661] kills=39 stalls=11 claims=2765 done=2664 fenced=0 lease_lost=2
+[  90.23s] progress: map[cancelled:277 failed:60 running:1 succeeded:2662] kills=44 stalls=12 claims=2767 done=2665 fenced=0 lease_lost=2
+[  94.43s] drained
+[  98.45s] all processes killed; checking invariants (throughput: 30.5 jobs/s end-to-end)
+
+=== STATS
+elapsed=1m38.451s final_states=map[cancelled:277 failed:60 succeeded:2663]
+chaos: kill9=46 sigstop_zombies=13 processes_spawned=55
+workers: claims=2767 done=2666 failed=60 fenced(stale completion rejected)=0 lease_lost(aborted)=2 reaped_requeued=44 reaped_failed=0 error_lines=0
+http: post_201=2855 post_200=1673 bursts(3x)=302 timeout_then_retry=145 replays=924 conflicts_409=50 cancels=363 (200=342 409=21) gets=61965 net_errs=0 5xx=0 api_error_lines=0
+executions: total_runs=2767 jobs_executed_more_than_once=39 (at-least-once execution is expected; effects must still be <=1)
+runs-per-job histogram: 0 runs:277 jobs, 1 runs:2684 jobs, 2 runs:34 jobs, 3 runs:5 jobs
+latency: queued->first_claim p50=21.61s p99=54.18s | created->succeeded p50=22.09s p99=54.40s
+effects: total=2666
+
+=== INVARIANTS
+PASS  C  coverage: a running job was cancelled and its worker aborted (LEASE_LOST)
+PASS  C  coverage: a zombie was rejected (FENCED or LEASE_LOST)
+PASS  C  coverage: heartbeat kept a job longer than the lease alive (succeeded on attempt 1)
+PASS  C  coverage: kill -9 happened and some job ran more than once
+PASS  I1 no lost job: ack'd id matches DB row for that key
+PASS  I1 no lost job: every acknowledged (key,id) exists in DB
+PASS  I1 no phantom/duplicate job: DB has exactly one row per submitted key
+FAIL  I2 at most one effect per job  (violations=3)
+         [837 2]
+         [2264 2]
+         [2525 2]
+PASS  I3 nothing stuck in running/queued after drain
+PASS  I4 attempt counter == number of claims, each attempt claimed once (no double claim)
+FAIL  I4 cancel acknowledged with 200 => job is cancelled  (violations=1)
+         [63 succeeded]
+PASS  I4 cancelled/failed jobs have no effect
+FAIL  I4 effect written by the job's final attempt (no stale/zombie effect)  (violations=6)
+         [2264 2 1]
+         [1515 3 2]
+         [2525 2 1]
+         [837 2 1]
+         [3668 2 1]
+PASS  I4 non-failing payload only fails by exhausting attempts
+PASS  I4 payload.fail=true => never succeeded
+FAIL  I4 succeeded <=> exactly one effect  (violations=3)
+         [837 succeeded 2]
+         [2264 succeeded 2]
+         [2525 succeeded 2]
+PASS  I4 terminal jobs have finished_at and no lease
+FAIL  I5 client-side: idempotency, 409 on conflict, cancel semantics, no terminal flip  (violations=27)
+         by kind: map[TERMINAL:27]
+         TERMINAL FLIP id=63: observed cancelled, later succeeded
+         TERMINAL FLIP id=63: observed cancelled, later succeeded
+         TERMINAL FLIP id=63: observed cancelled, later succeeded
+         TERMINAL FLIP id=63: observed cancelled, later succeeded
+         TERMINAL FLIP id=63: observed cancelled, later succeeded
+PASS  I6 no HTTP 5xx from API (availability, not data safety)
+PASS  I7 every DONE a worker logged has the matching committed effect (no acknowledged-but-lost result)
+PASS  I8 lease expiries <= kills + stalls (no unexplained lease loss)
+
+=== RESULT: FAIL (5 invariant groups violated) label=v2-negative-control-no-fencing seed=1794550519285558300
+
+exit_code=1

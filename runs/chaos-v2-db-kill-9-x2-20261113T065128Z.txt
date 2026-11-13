@@ -1,0 +1,106 @@
+ Container soup-postgres-1 Running 
+ Container soup-postgres-1 Waiting 
+ Container soup-postgres-1 Healthy 
+ Container soup-chaos-run-1f54c2803995 Creating 
+ Container soup-chaos-run-1f54c2803995 Created 
+=== CHAOS RUN label=v2-db-kill-9-x2 seed=1794552688776494877 started=2026-11-13T06:51:28Z
+config: jobs=10000 workers=8 rate=150/s kill_every=2s stall_every=7s stall_for=6s lease=3s dur=10..200ms
+        cancel=0.10 double_cancel=0.20 fail=0.02 long=0.010 burst=0.10 timeout_retry=0.05 dup=0.30 conflict=0.02 worker_args=""
+[   0.23s] api + 8 workers up
+[  10.25s] progress: map[cancelled:106 failed:5 queued:914 running:9 succeeded:466] kills=5 stalls=1 claims=486 done=466 fenced=1 lease_lost=1
+[  20.24s] progress: map[cancelled:251 failed:13 queued:1865 running:9 succeeded:862] kills=10 stalls=2 claims=896 done=862 fenced=2 lease_lost=1
+[  30.24s] progress: map[cancelled:379 failed:16 queued:2927 running:8 succeeded:1169] kills=14 stalls=4 claims=1211 done=1169 fenced=3 lease_lost=1
+[  40.25s] progress: map[cancelled:493 failed:27 queued:3591 running:10 succeeded:1472] kills=20 stalls=5 claims=1537 done=1472 fenced=4 lease_lost=1
+[  50.25s] progress: map[cancelled:647 failed:31 queued:4721 running:9 succeeded:1682] kills=26 stalls=7 claims=1758 done=1682 fenced=5 lease_lost=1
+[  60.25s] progress: map[cancelled:805 failed:35 queued:5899 running:9 succeeded:1842] kills=31 stalls=8 claims=1928 done=1842 fenced=6 lease_lost=1
+[  69.64s] production done: 10000 keys submitted; waiting for async replays/cancels
+[  70.25s] progress: map[cancelled:941 failed:45 queued:6868 running:9 succeeded:2137] kills=35 stalls=8 claims=2238 done=2137 fenced=7 lease_lost=1
+[  74.32s] async client traffic done; waiting for drain (no queued/running)
+[  80.25s] progress: map[cancelled:955 failed:53 queued:6558 running:8 succeeded:2426] kills=41 stalls=10 claims=2543 done=2426 fenced=7 lease_lost=1
+[  90.24s] progress: map[cancelled:955 failed:62 queued:6004 running:10 succeeded:2969] kills=46 stalls=11 claims=3102 done=2969 fenced=8 lease_lost=1
+[ 100.25s] progress: map[cancelled:955 failed:75 queued:5568 running:9 succeeded:3393] kills=51 stalls=13 claims=3544 done=3393 fenced=8 lease_lost=1
+[ 110.25s] progress: map[cancelled:955 failed:81 queued:5281 running:9 succeeded:3674] kills=56 stalls=15 claims=3838 done=3674 fenced=9 lease_lost=2
+[ 120.25s] progress: map[cancelled:955 failed:90 queued:4948 running:10 succeeded:3997] kills=62 stalls=16 claims=4176 done=3997 fenced=9 lease_lost=2
+[ 130.25s] progress: map[cancelled:955 failed:95 queued:4630 running:9 succeeded:4311] kills=67 stalls=17 claims=4500 done=4311 fenced=9 lease_lost=2
+[ 140.25s] progress: map[cancelled:955 failed:98 queued:4371 running:8 succeeded:4568] kills=72 stalls=18 claims=4766 done=4569 fenced=10 lease_lost=2
+[ 150.25s] progress: map[cancelled:955 failed:102 queued:4204 running:8 succeeded:4731] kills=78 stalls=20 claims=4940 done=4731 fenced=11 lease_lost=2
+[ 160.25s] progress: map[cancelled:955 failed:107 queued:3880 running:9 succeeded:5049] kills=83 stalls=21 claims=5270 done=5049 fenced=13 lease_lost=2
+[ 170.25s] progress: map[cancelled:955 failed:115 queued:3445 running:9 succeeded:5476] kills=88 stalls=22 claims=5709 done=5475 fenced=13 lease_lost=2
+[ 180.25s] progress: map[cancelled:955 failed:122 queued:3032 running:9 succeeded:5882] kills=93 stalls=23 claims=6128 done=5881 fenced=14 lease_lost=2
+[ 190.25s] progress: map[cancelled:955 failed:126 queued:2825 running:9 succeeded:6085] kills=98 stalls=25 claims=6341 done=6084 fenced=15 lease_lost=2
+[ 200.25s] progress: map[cancelled:955 failed:136 queued:2400 running:10 succeeded:6499] kills=102 stalls=26 claims=6771 done=6499 fenced=15 lease_lost=3
+[ 210.25s] progress: map[cancelled:955 failed:146 queued:2050 running:8 succeeded:6841] kills=107 stalls=27 claims=7127 done=6840 fenced=15 lease_lost=3
+[ 220.25s] progress: map[cancelled:955 failed:157 queued:1669 running:8 succeeded:7211] kills=112 stalls=29 claims=7514 done=7211 fenced=16 lease_lost=3
+[ 230.25s] progress: map[cancelled:955 failed:166 queued:1209 running:10 succeeded:7660] kills=117 stalls=30 claims=7978 done=7659 fenced=17 lease_lost=3
+[ 240.25s] progress: map[cancelled:955 failed:172 queued:827 running:8 succeeded:8038] kills=122 stalls=31 claims=8367 done=8037 fenced=17 lease_lost=3
+[ 250.25s] progress: map[cancelled:955 failed:180 queued:359 running:10 succeeded:8496] kills=127 stalls=33 claims=8840 done=8495 fenced=19 lease_lost=3
+[ 260.25s] progress: map[cancelled:955 failed:187 running:2 succeeded:8856] kills=132 stalls=33 claims=9205 done=8854 fenced=20 lease_lost=3
+[ 270.25s] progress: map[cancelled:955 failed:187 running:1 succeeded:8857] kills=137 stalls=34 claims=9206 done=8855 fenced=21 lease_lost=3
+[ 280.25s] progress: map[cancelled:955 failed:187 running:1 succeeded:8857] kills=142 stalls=35 claims=9208 done=8855 fenced=21 lease_lost=3
+[ 290.25s] progress: map[cancelled:955 failed:187 running:1 succeeded:8857] kills=147 stalls=37 claims=9209 done=8855 fenced=22 lease_lost=3
+[ 293.12s] drained
+[ 297.13s] all processes killed; checking invariants (throughput: 33.7 jobs/s end-to-end)
+
+=== STATS
+elapsed=4m57.133s final_states=map[cancelled:955 failed:188 succeeded:8857]
+chaos: kill9=148 sigstop_zombies=37 processes_spawned=157
+workers: claims=9209 done=8855 failed=187 fenced(stale completion rejected)=22 lease_lost(aborted)=3 reaped_requeued=162 reaped_failed=1 error_lines=246
+http: post_201=9551 post_200=5487 bursts(3x)=1012 timeout_then_retry=450 replays=3014 conflicts_409=202 cancels=1154 (200=1132 409=18) gets=186944 net_errs=0 5xx=1331 api_error_lines=0
+executions: total_runs=9209 jobs_executed_more_than_once=126 (at-least-once execution is expected; effects must still be <=1)
+runs-per-job histogram: 0 runs:953 jobs, 1 runs:8921 jobs, 2 runs:103 jobs, 3 runs:14 jobs, 4 runs:5 jobs, 5 runs:4 jobs
+latency: queued->first_claim p50=100.95s p99=187.83s | created->succeeded p50=101.18s p99=187.91s
+effects: total=8857
+error line samples:
+   worker: worker=a4819d10f6ef-241-87bf1d 06:52:03.048371 ERROR complete job=2258 attempt=1: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   worker: worker=a4819d10f6ef-241-87bf1d 06:52:03.049273 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-233-7df5ba 06:52:03.087469 ERROR complete job=2259 attempt=1: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   worker: worker=a4819d10f6ef-233-7df5ba 06:52:03.088154 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-181-843e12 06:52:03.093612 ERROR complete job=2263 attempt=1: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   worker: worker=a4819d10f6ef-189-b43c67 06:52:03.116202 ERROR reap: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   worker: worker=a4819d10f6ef-22-300846 06:52:03.125144 ERROR complete job=2269 attempt=1: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   worker: worker=a4819d10f6ef-215-b8801f 06:52:03.129855 ERROR heartbeat job=1807: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   worker: worker=a4819d10f6ef-22-300846 06:52:03.130348 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-225-e4bfee 06:52:03.144640 ERROR complete job=2266 attempt=1: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   worker: worker=a4819d10f6ef-225-e4bfee 06:52:03.150909 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-241-87bf1d 06:52:03.155868 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-137-03b258 06:52:03.175949 ERROR complete job=1982 attempt=2: FATAL: terminating connection due to unexpected postmaster exit (SQLSTATE 57P01)
+   worker: worker=a4819d10f6ef-137-03b258 06:52:03.179256 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-233-7df5ba 06:52:03.192046 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-225-e4bfee 06:52:03.255188 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-241-87bf1d 06:52:03.259733 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-137-03b258 06:52:03.285888 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-233-7df5ba 06:52:03.295786 ERROR claim: failed to connect to `user=soup database=soup_chaos`:
+   worker: worker=a4819d10f6ef-181-843e12 06:52:03.332511 ERROR reap: failed to connect to `user=soup database=soup_chaos`:
+
+=== INVARIANTS
+PASS  C  coverage: a running job was cancelled and its worker aborted (LEASE_LOST)
+PASS  C  coverage: a zombie was rejected (FENCED or LEASE_LOST)
+PASS  C  coverage: heartbeat kept a job longer than the lease alive (succeeded on attempt 1)
+PASS  C  coverage: kill -9 happened and some job ran more than once
+PASS  I1 no lost job: ack'd id matches DB row for that key
+PASS  I1 no lost job: every acknowledged (key,id) exists in DB
+PASS  I1 no phantom/duplicate job: DB has exactly one row per submitted key
+PASS  I2 at most one effect per job
+PASS  I3 nothing stuck in running/queued after drain
+PASS  I4 attempt counter == number of claims, each attempt claimed once (no double claim)
+PASS  I4 cancel acknowledged with 200 => job is cancelled
+PASS  I4 cancelled/failed jobs have no effect
+PASS  I4 effect written by the job's final attempt (no stale/zombie effect)
+PASS  I4 non-failing payload only fails by exhausting attempts
+PASS  I4 payload.fail=true => never succeeded
+PASS  I4 succeeded <=> exactly one effect
+PASS  I4 terminal jobs have finished_at and no lease
+FAIL  I5 client-side: idempotency, 409 on conflict, cancel semantics, no terminal flip  (violations=8)
+         by kind: map[CANCEL:4 CONFLICT:4]
+         CONFLICT key=job-004433 with different payload: expected 409, got 503 err=<nil>
+         CONFLICT key=job-004566 with different payload: expected 409, got 503 err=<nil>
+         CONFLICT key=job-004991 with different payload: expected 409, got 503 err=<nil>
+         CONFLICT key=job-005100 with different payload: expected 409, got 503 err=<nil>
+         CANCEL id=7487: gave up after retries
+FAIL  I6 no HTTP 5xx from API (availability, not data safety)  (violations=1331)
+PASS  I7 every DONE a worker logged has the matching committed effect (no acknowledged-but-lost result)
+PASS  I8 lease expiries <= kills + stalls (no unexplained lease loss)
+
+=== RESULT: FAIL (2 invariant groups violated) label=v2-db-kill-9-x2 seed=1794552688776494877
+
+exit_code=1

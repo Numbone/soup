@@ -1,0 +1,57 @@
+ Container soup-postgres-1 Running 
+ Container soup-postgres-1 Waiting 
+ Container soup-postgres-1 Healthy 
+ Container soup-chaos-run-142545fadd00 Creating 
+ Container soup-chaos-run-142545fadd00 Created 
+=== CHAOS RUN label=v2-smoke seed=1794550401336972301 started=2026-11-13T06:13:21Z
+config: jobs=1500 workers=8 rate=150/s kill_every=2s stall_every=7s stall_for=6s lease=3s dur=10..200ms
+        cancel=0.10 double_cancel=0.20 fail=0.02 long=0.020 burst=0.10 timeout_retry=0.05 dup=0.30 conflict=0.02 worker_args=""
+[   0.22s] api + 8 workers up
+[  10.23s] production done: 1500 keys submitted; waiting for async replays/cancels
+[  10.23s] progress: map[cancelled:148 failed:2 queued:1127 running:9 succeeded:214] kills=5 stalls=1 claims=229 done=214 fenced=0 lease_lost=0
+[  15.11s] async client traffic done; waiting for drain (no queued/running)
+[  20.23s] progress: map[cancelled:161 failed:5 queued:998 running:9 succeeded:327] kills=10 stalls=2 claims=350 done=327 fenced=0 lease_lost=0
+[  30.23s] progress: map[cancelled:161 failed:5 queued:823 running:9 succeeded:502] kills=15 stalls=4 claims=531 done=502 fenced=1 lease_lost=0
+[  40.23s] progress: map[cancelled:161 failed:6 queued:617 running:9 succeeded:707] kills=21 stalls=5 claims=743 done=707 fenced=1 lease_lost=0
+[  50.23s] progress: map[cancelled:161 failed:13 queued:354 running:7 succeeded:965] kills=24 stalls=6 claims=1012 done=965 fenced=1 lease_lost=1
+[  60.23s] progress: map[cancelled:161 failed:15 queued:215 running:10 succeeded:1099] kills=29 stalls=8 claims=1155 done=1099 fenced=3 lease_lost=1
+[  70.22s] progress: map[cancelled:161 failed:16 queued:72 running:10 succeeded:1241] kills=33 stalls=9 claims=1304 done=1241 fenced=5 lease_lost=1
+[  80.23s] progress: map[cancelled:161 failed:18 running:3 succeeded:1318] kills=37 stalls=11 claims=1382 done=1318 fenced=6 lease_lost=1
+[  88.77s] drained
+[  92.78s] all processes killed; checking invariants (throughput: 16.2 jobs/s end-to-end)
+
+=== STATS
+elapsed=1m32.783s final_states=map[cancelled:161 failed:18 succeeded:1321]
+chaos: kill9=41 sigstop_zombies=11 processes_spawned=50
+workers: claims=1382 done=1321 failed=18 fenced(stale completion rejected)=6 lease_lost(aborted)=1 reaped_requeued=43 reaped_failed=0 error_lines=0
+http: post_201=1417 post_200=786 bursts(3x)=133 timeout_then_retry=83 replays=437 conflicts_409=27 cancels=203 (200=193 409=10) gets=57664 net_errs=0 5xx=0 api_error_lines=0
+executions: total_runs=1382 jobs_executed_more_than_once=27 (at-least-once execution is expected; effects must still be <=1)
+runs-per-job histogram: 0 runs:161 jobs, 1 runs:1312 jobs, 2 runs:16 jobs, 3 runs:8 jobs, 4 runs:1 jobs, 5 runs:2 jobs
+latency: queued->first_claim p50=33.59s p99=61.71s | created->succeeded p50=33.72s p99=61.99s
+effects: total=1321
+
+=== INVARIANTS
+PASS  C  coverage: a running job was cancelled and its worker aborted (LEASE_LOST)
+PASS  C  coverage: a zombie was rejected (FENCED or LEASE_LOST)
+PASS  C  coverage: heartbeat kept a job longer than the lease alive (succeeded on attempt 1)
+PASS  C  coverage: kill -9 happened and some job ran more than once
+PASS  I1 no lost job: ack'd id matches DB row for that key
+PASS  I1 no lost job: every acknowledged (key,id) exists in DB
+PASS  I1 no phantom/duplicate job: DB has exactly one row per submitted key
+PASS  I2 at most one effect per job
+PASS  I3 nothing stuck in running/queued after drain
+PASS  I4 attempt counter == number of claims, each attempt claimed once (no double claim)
+PASS  I4 cancel acknowledged with 200 => job is cancelled
+PASS  I4 cancelled/failed jobs have no effect
+PASS  I4 effect written by the job's final attempt (no stale/zombie effect)
+PASS  I4 non-failing payload only fails by exhausting attempts
+PASS  I4 payload.fail=true => never succeeded
+PASS  I4 succeeded <=> exactly one effect
+PASS  I4 terminal jobs have finished_at and no lease
+PASS  I5 client-side: idempotency, 409 on conflict, cancel semantics, no terminal flip
+PASS  I6 no HTTP 5xx from API (availability, not data safety)
+PASS  I7 every DONE a worker logged has the matching committed effect (no acknowledged-but-lost result)
+PASS  I8 lease expiries <= kills + stalls (no unexplained lease loss)
+
+=== RESULT: PASS label=v2-smoke seed=1794550401336972301
+exit_code=0

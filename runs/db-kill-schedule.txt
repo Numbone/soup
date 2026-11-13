@@ -1,0 +1,4 @@
+[external] 06:08:12 docker kill postgres
+[external] 06:08:15 postgres started
+[external] 06:08:55 docker kill postgres #2
+[external] 06:08:57 postgres started #2

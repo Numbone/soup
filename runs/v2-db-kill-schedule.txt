@@ -1,0 +1,2 @@
+[external] 06:52:03 killed postgres
+[external] 06:52:45 killed postgres #2

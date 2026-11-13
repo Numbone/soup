@@ -1,0 +1,43 @@
+ Container soup-postgres-1 Running 
+ Container soup-postgres-1 Waiting 
+ Container soup-postgres-1 Healthy 
+ Container soup-chaos-run-64b06cabeddb Creating 
+ Container soup-chaos-run-64b06cabeddb Created 
+=== CHAOS RUN label=throughput-0ms seed=1794549869960411638 started=2026-11-13T06:04:29Z
+config: jobs=10000 workers=8 rate=0/s kill_every=2s stall_every=7s stall_for=6s lease=3s dur=0..0ms
+        cancel=0.10 double_cancel=0.20 fail=0.02 burst=0.10 timeout_retry=0.05 dup=0.30 conflict=0.02 worker_args=""
+[   0.22s] api + 8 workers up
+[   1.04s] production done: 10000 keys submitted; waiting for async replays/cancels
+[   6.02s] async client traffic done; waiting for drain (no queued/running)
+[   6.02s] drained
+[   6.03s] all processes killed; checking invariants (throughput: 1658.6 jobs/s end-to-end)
+
+=== STATS
+elapsed=6.029s final_states=map[cancelled:378 failed:200 succeeded:9422]
+chaos: kill9=3 sigstop_zombies=0 processes_spawned=12
+workers: claims=9622 done=9422 failed=200 fenced(stale completion rejected)=0 lease_lost(aborted)=0 reaped_requeued=0 reaped_failed=0 error_lines=0
+http: post_201=9565 post_200=5590 bursts(3x)=1058 timeout_then_retry=437 replays=3039 conflicts_409=186 cancels=1229 (200=461 409=768) gets=4056 net_errs=0 5xx=0 api_error_lines=0
+executions: total_runs=9622 jobs_executed_more_than_once=0 (at-least-once execution is expected; effects must still be <=1)
+runs-per-job histogram: 0 runs:378 jobs, 1 runs:9622 jobs
+latency: queued->first_claim p50=1.05s p99=1.90s | created->succeeded p50=1.05s p99=1.90s
+effects: total=9422
+
+=== INVARIANTS
+PASS  I1 no lost job: ack'd id matches DB row for that key
+PASS  I1 no lost job: every acknowledged (key,id) exists in DB
+PASS  I1 no phantom/duplicate job: DB has exactly one row per submitted key
+PASS  I2 at most one effect per job
+PASS  I3 nothing stuck in running/queued after drain
+PASS  I4 attempt counter == number of claims, each attempt claimed once (no double claim)
+PASS  I4 cancel acknowledged with 200 => job is cancelled
+PASS  I4 cancelled/failed jobs have no effect
+PASS  I4 effect written by the job's final attempt (no stale/zombie effect)
+PASS  I4 non-failing payload only fails by exhausting attempts
+PASS  I4 payload.fail=true => never succeeded
+PASS  I4 succeeded <=> exactly one effect
+PASS  I4 terminal jobs have finished_at and no lease
+PASS  I5 client-side: idempotency, 409 on conflict, cancel semantics, no terminal flip
+PASS  I6 no HTTP 5xx from API
+
+=== RESULT: PASS label=throughput-0ms seed=1794549869960411638
+exit_code=0
